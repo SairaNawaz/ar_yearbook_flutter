@@ -1,0 +1,80 @@
+group 'com.smartminds.flutter_ar_plugin'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.3.30'
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.ar.sceneform:plugin:1.9.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 28
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    defaultConfig {
+        minSdkVersion 24
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation "com.google.ar.sceneform:core:1.9.0"
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.9.0"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+}
+// models
+apply plugin: 'com.google.ar.sceneform.plugin'
+
+sceneform.asset('sampledata/augmented_video_model.obj',
+        'sampledata/augmented_video_material.mat',
+        'sampledata/augmented_video_model.sfa',
+        'src/main/res/raw/augmented_video_model')
+
+
+
+sceneform.asset('sampledata/Frame/Border.obj',
+        'default',
+        'sampledata/Frame/Border.sfa',
+        'src/main/assets/Border')
+
+sceneform.asset('sampledata/Buttons/facebook_Button.obj',
+        'default',
+        'sampledata/Buttons/facebook_Button.sfa',
+        'src/main/assets/facebook_Button')
+
+sceneform.asset('sampledata/Buttons/Call_Button.obj',
+        'default',
+        'sampledata/Buttons/Call_Button.sfa',
+        'src/main/assets/Call_Button')
+
+sceneform.asset('sampledata/Buttons/Message_Button.obj',
+        'default',
+        'sampledata/Buttons/Message_Button.sfa',
+        'src/main/assets/Message_Button')
